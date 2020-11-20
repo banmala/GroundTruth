@@ -14,7 +14,7 @@ dires=sorted(dires)
 with open('gt.txt', 'w', newline='') as file:
     writer = csv.writer(file)
     for key,dire in enumerate(dires):
-        frame=key+1
+        frame=key+20
         xml_file=(list(list_files(dire,"xml"))[0])
 
         with open("./"+dire+"/"+xml_file, "r") as file1:
