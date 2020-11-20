@@ -8,7 +8,7 @@ def list_files(directory, extension):
 
 content = []
 
-dires = [a for a in os.listdir() if os.path.isdir(a)]
+dires = [a for a in os.listdir() if os.path.isdir(a) if not a.startswith('.')]
 dires=sorted(dires)
 #list directory in given directory
 with open('gt.txt', 'w', newline='') as file:
@@ -17,17 +17,16 @@ with open('gt.txt', 'w', newline='') as file:
         frame=key+1
         xml_file=(list(list_files(dire,"xml"))[0])
 
-        with open("./"+dire+"/"+xml_file, "r") as file:
+        with open("./"+dire+"/"+xml_file, "r") as file1:
             # Read each line in the file, readlines() returns a list of lines
-            content = file.readlines()
+            content = file1.readlines()
             # Combine the lines in the list into a string
             content = "".join(content)
             bs_content = bs(content, "lxml")
             result = bs_content.find_all("object")
 
             val_x = bs_content.find_all("x")
-            val_y = bs_content.find_all("y")        
-            print(len(result))
+            val_y = bs_content.find_all("y")     
             for i in range(len(result)):
                 temp_name=(result[i].find("name").getText())
                 
